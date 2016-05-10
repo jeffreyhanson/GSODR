@@ -31,9 +31,14 @@
         <h1>
 <a id="gsodr" class="anchor" href="#gsodr" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GSODR</h1>
 
-<p>An R package that provides a function that automates downloading and cleaning data from the Global Summary of the Day (GSOD) data provided by the US National Climatic Data Center (NCDC). Stations are individually checked for number of missing days to assure data quality, stations with too many missing observations are omitted. All units are converted to metric, e.g. feet to metres and Fahrenheit to Celcius. Output is saved as a .csv file summarizing each year by station, which includes vapor pressure and relative humidity variables calculated from existing data in GSOD.</p>
+<p><a href="https://travis-ci.org/adamhsparks/GSODR"><img src="https://travis-ci.org/adamhsparks/GSODR.svg?branch=master" alt="Travis-CI Build Status"></a>
+<a href="https://ci.appveyor.com/project/adamhsparks/GSODR/branch/master"><img src="https://ci.appveyor.com/api/projects/status/8daqtllo2sg6me07/branch/master" alt="Build status"></a>
+<a href="https://github.com/metacran/cranlogs.app"><img src="http://cranlogs.r-pkg.org/badges/GSODR?color=brightgreen" alt="rstudio mirror downloads"></a>
+<a href="https://cran.r-project.org/package=GSODR"><img src="http://www.r-pkg.org/badges/version/GSODR" alt="cran version"></a></p>
 
-<p>This package is largely based on Tomislav Hengl's work in "<a href="http://spatial-analyst.net/book/getGSOD.R">A Practical Guide to Geostatistical Mapping</a>", with updates for speed and cross-platform functionality and some added functionality.</p>
+<p>An R package that provides a function that automates downloading and cleaning data from the "<a href="https://data.noaa.gov/dataset/global-surface-summary-of-the-day-gsod">Global Surface Summary of the Day (GSOD)</a>" data provided by the US National Climatic Data Center (NCDC). Stations are individually checked for number of missing days to assure data quality, stations with too many missing observations are omitted. All units are converted to metric, e.g. feet to metres and Fahrenheit to Celcius. Output is saved as a Comma Separated Value (CSV) file summarizing each year by station, which includes vapor pressure and relative humidity variables calculated from existing data in GSOD.</p>
+
+<p>This package is largely based on Tomislav Hengl's work in "<a href="http://spatial-analyst.net/book/getGSOD.R">A Practical Guide to Geostatistical Mapping</a>", with updates for speed, cross-platform functionality and some added functionality.</p>
 
 <p>Be sure to have disk space free and allocate the proper time for this to run. This is a time, processor and disk space intensive process.</p>
 
@@ -41,6 +46,16 @@
 
 <h2>
 <a id="to-install-this-package" class="anchor" href="#to-install-this-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>To install this package</h2>
+
+<h3>
+<a id="stable-release-from-cran" class="anchor" href="#stable-release-from-cran" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Stable release from CRAN</h3>
+
+<p>GSODR is available on CRAN.</p>
+
+<p><code>install.packages("GSODR", dep = TRUE)</code></p>
+
+<h3>
+<a id="the-development-version-from-github" class="anchor" href="#the-development-version-from-github" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The development version from GitHub</h3>
 
 <p>Install the devtools package, available from CRAN.</p>
 
@@ -59,11 +74,9 @@
 
 <p>See <code>?get_GSOD()</code> for the help file.</p>
 
-<p>Example from help file, to download data for years 2009 and 2010 and generate yearly summary files, GSOD_TP2009_XY and GSOD_TP2010_XY files in folders 2009 and 2010 of your default working directory with a maximum of five missing days per weather station allowed.</p>
+<p>Example from help file, to download data for years 2009 and 2010 and generate yearly summary files, GSOD_2009.csv and GSOD_2010.csv files in your Downloads directory with a maximum of five missing days per weather station allowed.</p>
 
-<p><code>get_GSOD(years = 2009:2010, max_missing = 5)</code></p>
-
-<p><a href="https://travis-ci.org/adamhsparks/GSODR"><img src="https://travis-ci.org/adamhsparks/GSODR.svg?branch=master" alt="Travis-CI Build Status"></a></p>
+<p><code>get_GSOD(years = 2009:2010, max_missing = 5, path = "~/Downloads")</code></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/adamhsparks">adamhsparks</a></p>
