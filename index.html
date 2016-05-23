@@ -166,26 +166,23 @@ website): </p>
 <h2>
 <a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples</h2>
 
-<pre><code># Download weather station for Toowoomba, Queensland for 2010, save resulting
-# file in the user's Downloads directory.
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># Download weather station for Toowoomba, Queensland for 2010, save resulting</span>
+<span class="pl-c"># file in the user's Downloads directory.</span>
 
-get_GSOD(years = 2010, station = "955510-99999", path = "~/Downloads")
-</code></pre>
+get_GSOD(<span class="pl-v">years</span> <span class="pl-k">=</span> <span class="pl-c1">2010</span>, <span class="pl-v">station</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>955510-99999<span class="pl-pds">"</span></span>, <span class="pl-v">path</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>~/Downloads<span class="pl-pds">"</span></span>)</pre></div>
 
-<pre><code># Download global GSOD data for agroclimatology work for years 2009 and 2010
-# and generate yearly summary files, GSOD_2009_XY and GSOD_2010_XY in folders
-# named 2009 and 2010 in the user's Downloads directory with a maximum of
-# five missing days per weather station allowed.
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># Download global GSOD data for agroclimatology work for years 2009 and 2010</span>
+<span class="pl-c"># and generate yearly summary files, GSOD_2009_XY and GSOD_2010_XY in folders</span>
+<span class="pl-c"># named 2009 and 2010 in the user's Downloads directory with a maximum of</span>
+<span class="pl-c"># five missing days per weather station allowed.</span>
 
-get_GSOD(years = 2010:2011, path = "~/Downloads", agroclimatology = TRUE)
-</code></pre>
+get_GSOD(<span class="pl-v">years</span> <span class="pl-k">=</span> <span class="pl-c1">2010</span><span class="pl-k">:</span><span class="pl-c1">2011</span>, <span class="pl-v">path</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>~/Downloads<span class="pl-pds">"</span></span>, <span class="pl-v">agroclimatology</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)</pre></div>
 
-<pre><code># Download data for Australia for year 2010 and generate a yearly
-# summary file, GSOD_2010_XY files in the user's Downloads directory with a
-maximum of five missing days per station allowed.
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># Download data for Australia for year 2010 and generate a yearly</span>
+<span class="pl-c"># summary file, GSOD_2010_XY files in the user's Downloads directory with a</span>
+<span class="pl-smi">maximum</span> <span class="pl-smi">of</span> <span class="pl-smi">five</span> <span class="pl-smi">missing</span> <span class="pl-smi">days</span> <span class="pl-smi">per</span> <span class="pl-smi">station</span> <span class="pl-smi">allowed</span>.
 
-get_GSOD(years = 2010, country = "Australia", path = "~/Downloads")
-</code></pre>
+get_GSOD(<span class="pl-v">years</span> <span class="pl-k">=</span> <span class="pl-c1">2010</span>, <span class="pl-v">country</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Australia<span class="pl-pds">"</span></span>, <span class="pl-v">path</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>~/Downloads<span class="pl-pds">"</span></span>)</pre></div>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/adamhsparks/GSODR">GSODR</a> is maintained by <a href="https://github.com/adamhsparks">adamhsparks</a>.</span>
