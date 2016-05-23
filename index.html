@@ -74,63 +74,64 @@
 <a id="function-description" class="anchor" href="#function-description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function description</h2>
 
 <p>This package consists of a single function, get_GSOD(), which generates a 
-.csv file in the respective year directory containing the following variables:
-STNID - Station number (WMO/DATSAV3 number) for the location;<br>
-WBAN - number where applicable--this is the historical "Weather Bureau Air
+.csv file in the respective year directory containing the following variables:<br>
+<strong>STNID</strong> - Station number (WMO/DATSAV3 number) for the location;<br>
+<strong>WBAN</strong> - number where applicable--this is the historical "Weather Bureau Air
 Force Navy" number - with WBAN being the acronym;<br>
-STATION NAME;<br>
-CTRY - Country;<br>
-LAT - Latitude. <strong>Station dropped in cases where values are &lt;-90/&gt;90 degrees or Lat = 0 and Lon = 0</strong>;<br>
-LON - Longitude. <strong>Station dropped in cases where values are &lt;-180/&gt;180 degrees or Lat = 0 and Lon = 0</strong>;<br>
-ELEV.M - Elevation converted to metres. <strong>Station dropped where ELEV is NA</strong>;<br>
-YEARMODA - Date in YYYY-MM-DD format;<br>
-YEAR - The year;<br>
-MONTH - The month;<br>
-DAY - The day;<br>
-YDAY - Sequential day of year (not in original GSOD);<br>
-TEMP - Mean daily temperature converted to degrees C to tenths. Missing =
+<strong>STATION NAME</strong> - Unique text identifier;<br>
+<strong>CTRY</strong> - Country;<br>
+<strong>LAT</strong> - Latitude. <em>Station dropped in cases where values are &lt;-90 or &gt;90 degrees or Lat = 0 and Lon = 0</em>;<br>
+<strong>LON</strong> - Longitude. <em>Station dropped in cases where values are &lt;-180 or &gt;180 degrees or Lat = 0 and Lon = 0</em>;<br>
+<strong>ELEV.M</strong> - Elevation converted to metres. <em>Station dropped where ELEV is NA</em>;<br>
+<strong>YEARMODA</strong> - Date in YYYY-MM-DD format;<br>
+<strong>YEAR</strong> - The year;<br>
+vMONTH** - The month;<br>
+<strong>DAY</strong> - The day;<br>
+<strong>YDAYv - Sequential day of year (not in original GSOD);<br>
+*<em>TEMPv - Mean daily temperature converted to degrees C to tenths. Missing =
 -9999.99;<br>
-COUNT.TEMP - Number of observations used in calculating mean daily
+*</em>COUNT.TEMP</strong> - Number of observations used in calculating mean daily
 temperature;<br>
-DEWP-  Mean daily dewpoint converted to degrees C to tenths. Missing =
+<strong>DEWP</strong>-  Mean daily dewpoint converted to degrees C to tenths. Missing =
 -9999.99;<br>
-COUNT.DEWP - Number of observations used in calculating mean daily dew point;<br>
-SLP - Mean sea level pressure in millibars to tenths. Missing = -9999.99;<br>
-COUNT.SLP - Number of observations used in calculating mean sea level
+<strong>COUNT.DEWP</strong> - Number of observations used in calculating mean daily dew point;<br>
+<strong>SLP</strong> - Mean sea level pressure in millibars to tenths. Missing = -9999.99;<br>
+<strong>COUNT.SLP</strong> - Number of observations used in calculating mean sea level
 pressure;<br>
-STP - Mean station pressure for the day in millibars to tenths
+<strong>STP</strong> - Mean station pressure for the day in millibars to tenths
 Missing = -9999.99;<br>
-COUNT.STP - Number of observations used in calculating mean station pressure;<br>
-VISIB - Mean visibility for the day converted to kilometers to tenths
+<strong>COUNT.STP</strong> - Number of observations used in calculating mean station pressure;<br>
+<strong>VISIB</strong> - Mean visibility for the day converted to kilometers to tenths
 Missing = -9999.99;<br>
-COUNT.VISIB - Number of observations used in calculating mean daily
+<strong>COUNT.VISIB</strong> - Number of observations used in calculating mean daily
 visibility;<br>
-WDSP - Mean daily wind speed value converted to metres/second to tenths
+<strong>WDSP</strong> - Mean daily wind speed value converted to metres/second to tenths
 Missing = -9999.99;<br>
-COUNT.WDSP - Number of observations used in calculating mean daily windspeed;<br>
-MXSPD - Maximum sustained wind speed reported for the day converted to
+<strong>COUNT.WDSP</strong> - Number of observations used in calculating mean daily windspeed;<br>
+<strong>MXSPD</strong> - Maximum sustained wind speed reported for the day converted to
 metres/second to tenths. Missing = -9999.99;<br>
-GUST = Maximum wind gust reported for the day converted to metres/second to
+<strong>GUST</strong> = Maximum wind gust reported for the day converted to metres/second to
 tenths. Missing = -9999.99;<br>
-MAX - Maximum temperature reported during the day converted to Celsius to
+<strong>MAX</strong> - Maximum temperature reported during the day converted to Celsius to
 tenths--time of max temp report varies by country and region, so this will
-sometimes not be the max for the calendar day. The "<em>" flag is dropped. *</em>In
-instances where MAX &lt; MIN, both MAX and MIN are set to Missing.**
+sometimes not be the max for the calendar day. The "<em>" flag is dropped. *In
+instances where MAX &lt; MIN, both MAX and MIN are set to Missing.</em>
 Missing = -9999.99;<br>
-MIN- Minimum temperature reported during the day converted to Celcious to
+<strong>MIN</strong>- Minimum temperature reported during the day converted to Celcious to
 tenths--time of min temp report varies by country and region, so this will
-sometimes not be the max for the calendar day. The "*" flag is dropped. <strong>In
-instances where MAX &lt; MIN, both MAX and MIN are set to Missing.</strong>
+sometimes not be the max for the calendar day. The "*" flag is dropped. <em>In
+instances where MAX &lt; MIN, both MAX and MIN are set to Missing.</em>
 Missing = -9999.99;<br>
-PRCP - Total precipitation (rain and/or melted snow) reported during the day
+<strong>PRCP</strong> - Total precipitation (rain and/or melted snow) reported during the day
 converted to millimetres to hundredths;   will usually not end with the
 midnight observation--i.e., may include latter part of previous day. .00
 indicates no measurable precipitation (includes a trace). Missing = -9999.99.
-Note:  Many stations do not report '0' on days with no precipitation--
+<em>Note:  Many stations do not report '0' on days with no precipitation--
 therefore, '-9999.99' will often appear on these days. For example, a
 station may only report a 6-hour amount for the period during which rain
-fell. See FLAGS.PRCP column for source of data;<br>
-FLAGS.PRCP -  A = 1 report of 6-hour precipitation amount;<br>
+fell.</em> See FLAGS.PRCP column for source of data;<br>
+<strong>FLAGS.PRCP</strong> -<br>
+A = 1 report of 6-hour precipitation amount;<br>
 B = Summation of 2 reports of 6-hour precipitation amount;<br>
 C = Summation of 3 reports of 6-hour precipitation amount;<br>
 D = Summation of 4 reports of 6-hour precipitation amount;<br>
@@ -144,22 +145,22 @@ as incomplete data for the day;<br>
 I = Station did not report any precip data for the day and did not report any
 occurrences of precipitation in its hourly observations--it's still possible
 that precip occurred but was not reported;<br>
-SNDP - Snow depth in millimetres to tenths. Missing = -9999.99;<br>
-INDICATOR.* (1 = yes, 0 = no/not reported) for the occurrence during the day
-of:
-FOG,
-RAIN or drizzle,
-SNOW or ice pellets,
-HAIL,
-THUNDER,
+<strong>SNDP</strong> - Snow depth in millimetres to tenths. Missing = -9999.99;<br>
+<strong>INDICATOR</strong> - (1 = yes, 0 = no/not reported) for the occurrence during the day
+of:<br>
+FOG,<br>
+RAIN or drizzle,<br>
+SNOW or ice pellets,<br>
+HAIL,<br>
+THUNDER,<br>
 TORNADO or funnel cloud;  </p>
 
 <h3>
 <a id="values-calculated-by-this-package" class="anchor" href="#values-calculated-by-this-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Values calculated by this package:</h3>
 
-<p>ea - Mean daily actual vapour pressure;<br>
-es - Mean daily saturation vapour pressure;<br>
-RH - Mean daily relative humidity;  </p>
+<p><strong>ea</strong> - Mean daily actual vapour pressure;<br>
+<strong>es</strong> - Mean daily saturation vapour pressure;<br>
+<strong>RH</strong> - Mean daily relative humidity;  </p>
 
 <h2>
 <a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Disclaimer</h2>
