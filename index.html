@@ -27,11 +27,11 @@
 <a href="https://github.com/metacran/cranlogs.app"><img src="http://cranlogs.r-pkg.org/badges/GSODR?color=brightgreen" alt="rstudio mirror downloads"></a>
 <a href="https://cran.r-project.org/package=GSODR"><img src="http://www.r-pkg.org/badges/version/GSODR" alt="cran version"></a></p>
 
-<p>An R package that provides a function that automates downloading and cleaning data from the "<a href="https://data.noaa.gov/dataset/global-surface-summary-of-the-day-gsod">Global Surface Summary of the Day (GSOD)</a>" data provided by the US National Climatic Data Center (NCDC). Stations are individually checked for number of missing days to assure data quality, stations with too many missing observations are omitted. All units are converted to metric, e.g. feet to metres and Fahrenheit to Celcius. Output is saved as a Comma Separated Value (CSV) file summarizing each year by station, which includes vapor pressure and relative humidity variables calculated from existing data in GSOD.</p>
+<p>An R package that provides a function that automates downloading and cleaning data from the "<a href="https://data.noaa.gov/dataset/global-surface-summary-of-the-day-gsod">Global Surface Summary of the Day (GSOD)</a>" data provided by the US National Climatic Data Center (NCDC). Stations are individually checked for number of missing days to assure data quality, stations with too many missing observations are omitted. All units are converted to metric, e.g. feet to metres and Fahrenheit to Celsius. Output is saved as a Comma Separated Value (CSV) file summarizing each year by station, which includes vapor pressure and relative humidity variables calculated from existing data in GSOD.</p>
 
 <p>This package was largely based on Tomislav Hengl's work in "<a href="http://spatial-analyst.net/book/getGSOD.R">A Practical Guide to Geostatistical Mapping</a>", with updates for speed, cross-platform functionality and some added functionality.</p>
 
-<p>Be sure to have disk space free and allocate the proper time for this to run. This is a time, processor and disk space intensive process.</p>
+<p>Be sure to have disk space free and allocate the proper time for this to run. This is a time, RAM and disk space intensive process, however it does not require much processing power. </p>
 
 <p>For more information see the description of the data provided by NCDC, <a href="http://www7.ncdc.noaa.gov/CDO/GSOD_DESC.txt">http://www7.ncdc.noaa.gov/CDO/GSOD_DESC.txt</a>.</p>
 
@@ -64,7 +64,7 @@
 <h2>
 <a id="function-description" class="anchor" href="#function-description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function description</h2>
 
-<p>This package consists of a single function, get_GSOD(), which generates a 
+<p>This package consists of a single function, <code>get_GSOD()</code>, which generates a 
 .csv file in the respective year directory containing the following variables:<br>
 <strong>STNID</strong> - Station number (WMO/DATSAV3 number) for the location;<br>
 <strong>WBAN</strong> - number where applicable--this is the historical "Weather Bureau Air
@@ -81,47 +81,49 @@ Force Navy" number - with WBAN being the acronym;<br>
 <strong>YDAY</strong> - Sequential day of year (not in original GSOD);<br>
 <strong>TEMP</strong> - Mean daily temperature converted to degrees C to tenths. Missing =
 -9999.99;<br>
-<strong>COUNT.TEMP</strong> - Number of observations used in calculating mean daily
+<strong>TEMP.COUNT</strong> - Number of observations used in calculating mean daily
 temperature;<br>
 <strong>DEWP</strong>-  Mean daily dewpoint converted to degrees C to tenths. Missing =
 -9999.99;<br>
-<strong>COUNT.DEWP</strong> - Number of observations used in calculating mean daily dew point;<br>
+<strong>DEWP.COUNT</strong> - Number of observations used in calculating mean daily dew point;<br>
 <strong>SLP</strong> - Mean sea level pressure in millibars to tenths. Missing = -9999.99;<br>
-<strong>COUNT.SLP</strong> - Number of observations used in calculating mean sea level
+<strong>SLP.COUNT</strong> - Number of observations used in calculating mean sea level
 pressure;<br>
 <strong>STP</strong> - Mean station pressure for the day in millibars to tenths
 Missing = -9999.99;<br>
-<strong>COUNT.STP</strong> - Number of observations used in calculating mean station pressure;<br>
+<strong>STP.COUNT</strong> - Number of observations used in calculating mean station pressure;<br>
 <strong>VISIB</strong> - Mean visibility for the day converted to kilometers to tenths
 Missing = -9999.99;<br>
-<strong>COUNT.VISIB</strong> - Number of observations used in calculating mean daily
+<strong>VISIB.COUNT</strong> - Number of observations used in calculating mean daily
 visibility;<br>
 <strong>WDSP</strong> - Mean daily wind speed value converted to metres/second to tenths
 Missing = -9999.99;<br>
-<strong>COUNT.WDSP</strong> - Number of observations used in calculating mean daily windspeed;<br>
+<strong>WDSP.COUNT</strong> - Number of observations used in calculating mean daily windspeed;<br>
 <strong>MXSPD</strong> - Maximum sustained wind speed reported for the day converted to
 metres/second to tenths. Missing = -9999.99;<br>
 <strong>GUST</strong> = Maximum wind gust reported for the day converted to metres/second to
 tenths. Missing = -9999.99;<br>
 <strong>MAX</strong> - Maximum temperature reported during the day converted to Celsius to
 tenths--time of max temp report varies by country and region, so this will
-sometimes not be the max for the calendar day. The "<em>" flag is dropped. *In
-instances where MAX &lt; MIN, both MAX and MIN are set to Missing.</em>
-Missing = -9999.99;<br>
-<strong>MIN</strong>- Minimum temperature reported during the day converted to Celcious to
+sometimes not be the max for the calendar day;<br>
+<strong>MAX.FLAG</strong> - Blank indicates max temp was taken from the explicit max
+temp report and not from the 'hourly' data.  * indicates max temp was derived
+from the hourly data (i.e., highest hourly or synoptic-reported temperature);<br>
+<strong>MIN</strong>- Minimum temperature reported during the day converted to Celsius to
 tenths--time of min temp report varies by country and region, so this will
-sometimes not be the max for the calendar day. The "*" flag is dropped. <em>In
-instances where MAX &lt; MIN, both MAX and MIN are set to Missing.</em>
-Missing = -9999.99;<br>
+sometimes not be the max for the calendar day;<br>
+<strong>MIN.FLAG</strong> - Blank indicates max temp was taken from the explicit max
+temp report and not from the 'hourly' data. * indicates max temp was derived
+from the hourly data (i.e., highest hourly or synoptic-reported temperature);<br>
 <strong>PRCP</strong> - Total precipitation (rain and/or melted snow) reported during the day
 converted to millimetres to hundredths;   will usually not end with the
 midnight observation--i.e., may include latter part of previous day. .00
-indicates no measurable precipitation (includes a trace). Missing = -9999.99.
+indicates no measurable precipitation (includes a trace). Missing = -9999.99;
 <em>Note:  Many stations do not report '0' on days with no precipitation--
 therefore, '-9999.99' will often appear on these days. For example, a
 station may only report a 6-hour amount for the period during which rain
 fell.</em> See FLAGS.PRCP column for source of data;<br>
-<strong>FLAGS.PRCP</strong> -<br>
+<strong>PRCP.FLAG</strong> -<br>
 A = 1 report of 6-hour precipitation amount;<br>
 B = Summation of 2 reports of 6-hour precipitation amount;<br>
 C = Summation of 3 reports of 6-hour precipitation amount;<br>
@@ -137,17 +139,20 @@ I = Station did not report any precip data for the day and did not report any
 occurrences of precipitation in its hourly observations--it's still possible
 that precip occurred but was not reported;<br>
 <strong>SNDP</strong> - Snow depth in millimetres to tenths. Missing = -9999.99;<br>
-<strong>INDICATOR</strong> - (1 = yes, 0 = no/not reported) for the occurrence during the day
-of:<br>
-FOG,<br>
-RAIN or drizzle,<br>
-SNOW or ice pellets,<br>
-HAIL,<br>
-THUNDER,<br>
-TORNADO or funnel cloud;  </p>
+<strong>I.FOG</strong> - (1 = yes, 0 = no/not reported) for the occurrence during the day;<br>
+<strong>I.RAIN_DRIZZLE</strong> - (1 = yes, 0 = no/not reported) for the occurrence during
+the day;<br>
+<strong>I.SNOW_ICE</strong> - (1 = yes, 0 = no/not reported) for the occurrence during
+the day;<br>
+<strong>I.HAIL</strong> - (1 = yes, 0 = no/not reported) for the occurrence during the
+day;<br>
+<strong>I.THUNDER</strong>  - (1 = yes, 0 = no/not reported) for the occurrence during the
+day;<br>
+<strong>I.TORNADO_FUNNEL</strong> - (1 = yes, 0 = no/not reported) for the occurrence during
+the day;  </p>
 
 <h3>
-<a id="values-calculated-by-this-package" class="anchor" href="#values-calculated-by-this-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Values calculated by this package:</h3>
+<a id="values-calculated-by-this-package-and-included-in-final-output" class="anchor" href="#values-calculated-by-this-package-and-included-in-final-output" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Values calculated by this package and included in final output:</h3>
 
 <p><strong>ea</strong> - Mean daily actual vapour pressure;<br>
 <strong>es</strong> - Mean daily saturation vapour pressure;<br>
