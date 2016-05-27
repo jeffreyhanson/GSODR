@@ -27,7 +27,7 @@
 <a href="https://github.com/metacran/cranlogs.app"><img src="http://cranlogs.r-pkg.org/badges/GSODR?color=brightgreen" alt="rstudio mirror downloads"></a>
 <a href="https://cran.r-project.org/package=GSODR"><img src="http://www.r-pkg.org/badges/version/GSODR" alt="cran version"></a></p>
 
-<p>An R package that provides a function that automates downloading and cleaning data from the "<a href="https://data.noaa.gov/dataset/global-surface-summary-of-the-day-gsod">Global Surface Summary of the Day (GSOD)</a>" data provided by the US National Climatic Data Center (NCDC). Stations are individually checked for number of missing days to assure data quality, stations with too many missing observations are omitted. All units are converted to metric, e.g. feet to metres and Fahrenheit to Celsius. Output is saved as a Comma Separated Value (CSV) file summarizing each year by station, which includes vapor pressure and relative humidity variables calculated from existing data in GSOD.</p>
+<p>An R package that provides a function that automates downloading and cleaning data from the "<a href="https://data.noaa.gov/dataset/global-surface-summary-of-the-day-gsod">Global Surface Summary of the Day (GSOD)</a>" data provided by the US National Climatic Data Center (NCDC). Stations are individually checked for number of missing days to assure data quality, stations with too many missing observations are omitted. All units are converted to metric, e.g. feet to metres and Fahrenheit to Celsius. Output is saved as a Comma Separated Value (CSV) file or ESRI format shapefile summarizing each year by station, which includes vapor pressure and relative humidity variables calculated from existing data in GSOD.</p>
 
 <p>This package was largely based on Tomislav Hengl's work in "<a href="http://spatial-analyst.net/book/getGSOD.R">A Practical Guide to Geostatistical Mapping</a>", with updates for speed, cross-platform functionality and some added functionality.</p>
 
@@ -65,11 +65,11 @@
 <a id="function-description" class="anchor" href="#function-description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function description</h2>
 
 <p>This package consists of a single function, <code>get_GSOD()</code>, which generates a 
-.csv file in the respective year directory containing the following variables:<br>
+.csv file or ESRI format shapefile in the respective year directory containing the following variables:<br>
 <strong>STNID</strong> - Station number (WMO/DATSAV3 number) for the location;<br>
 <strong>WBAN</strong> - number where applicable--this is the historical "Weather Bureau Air
 Force Navy" number - with WBAN being the acronym;<br>
-<strong>STATION NAME</strong> - Unique text identifier;<br>
+<strong>STN NAME</strong> - Unique text identifier;<br>
 <strong>CTRY</strong> - Country;<br>
 <strong>LAT</strong> - Latitude. <em>Station dropped in cases where values are &lt;-90 or &gt;90 degrees or Lat = 0 and Lon = 0</em>;<br>
 <strong>LON</strong> - Longitude. <em>Station dropped in cases where values are &lt;-180 or &gt;180 degrees or Lat = 0 and Lon = 0</em>;<br>
@@ -81,24 +81,24 @@ Force Navy" number - with WBAN being the acronym;<br>
 <strong>YDAY</strong> - Sequential day of year (not in original GSOD);<br>
 <strong>TEMP</strong> - Mean daily temperature converted to degrees C to tenths. Missing =
 -9999.99;<br>
-<strong>TEMP.COUNT</strong> - Number of observations used in calculating mean daily
+<strong>TEMP.CNT</strong> - Number of observations used in calculating mean daily
 temperature;<br>
 <strong>DEWP</strong>-  Mean daily dewpoint converted to degrees C to tenths. Missing =
 -9999.99;<br>
-<strong>DEWP.COUNT</strong> - Number of observations used in calculating mean daily dew point;<br>
+<strong>DEWP.CNT</strong> - Number of observations used in calculating mean daily dew point;<br>
 <strong>SLP</strong> - Mean sea level pressure in millibars to tenths. Missing = -9999.99;<br>
-<strong>SLP.COUNT</strong> - Number of observations used in calculating mean sea level
+<strong>SLP.CNT</strong> - Number of observations used in calculating mean sea level
 pressure;<br>
 <strong>STP</strong> - Mean station pressure for the day in millibars to tenths
 Missing = -9999.99;<br>
-<strong>STP.COUNT</strong> - Number of observations used in calculating mean station pressure;<br>
+<strong>STP.CNT</strong> - Number of observations used in calculating mean station pressure;<br>
 <strong>VISIB</strong> - Mean visibility for the day converted to kilometers to tenths
 Missing = -9999.99;<br>
-<strong>VISIB.COUNT</strong> - Number of observations used in calculating mean daily
+<strong>VISIB.CNT</strong> - Number of observations used in calculating mean daily
 visibility;<br>
 <strong>WDSP</strong> - Mean daily wind speed value converted to metres/second to tenths
 Missing = -9999.99;<br>
-<strong>WDSP.COUNT</strong> - Number of observations used in calculating mean daily windspeed;<br>
+<strong>WDSP.CNT</strong> - Number of observations used in calculating mean daily windspeed;<br>
 <strong>MXSPD</strong> - Maximum sustained wind speed reported for the day converted to
 metres/second to tenths. Missing = -9999.99;<br>
 <strong>GUST</strong> = Maximum wind gust reported for the day converted to metres/second to
@@ -140,15 +140,15 @@ occurrences of precipitation in its hourly observations--it's still possible
 that precip occurred but was not reported;<br>
 <strong>SNDP</strong> - Snow depth in millimetres to tenths. Missing = -9999.99;<br>
 <strong>I.FOG</strong> - (1 = yes, 0 = no/not reported) for the occurrence during the day;<br>
-<strong>I.RAIN_DRIZZLE</strong> - (1 = yes, 0 = no/not reported) for the occurrence during
+<strong>I.RAIN_DZL</strong> - (1 = yes, 0 = no/not reported) for the occurrence during
 the day;<br>
-<strong>I.SNOW_ICE</strong> - (1 = yes, 0 = no/not reported) for the occurrence during
+<strong>I.SNW_ICE</strong> - (1 = yes, 0 = no/not reported) for the occurrence during
 the day;<br>
 <strong>I.HAIL</strong> - (1 = yes, 0 = no/not reported) for the occurrence during the
 day;<br>
 <strong>I.THUNDER</strong>  - (1 = yes, 0 = no/not reported) for the occurrence during the
 day;<br>
-<strong>I.TORNADO_FUNNEL</strong> - (1 = yes, 0 = no/not reported) for the occurrence during
+<strong>I.TDO_FNL</strong> - (1 = yes, 0 = no/not reported) for the occurrence during
 the day;  </p>
 
 <h3>
