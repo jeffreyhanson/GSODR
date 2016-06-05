@@ -29,7 +29,7 @@
 
 <p>An R package that provides a function that automates downloading and cleaning data from the "<a href="https://data.noaa.gov/dataset/global-surface-summary-of-the-day-gsod">Global Surface Summary of the Day (GSOD)</a>" data provided by the US National Climatic Data Center (NCDC). Stations are individually checked for number of missing days to assure data quality, stations with too many missing observations are omitted. All units are converted to metric, e.g. feet to metres and Fahrenheit to Celsius. Output is saved as a Comma Separated Value (CSV) file or ESRI format shapefile summarizing each year by station, which includes vapor pressure and relative humidity variables calculated from existing data in GSOD.</p>
 
-<p>This package was largely based on Tomislav Hengl's work in "<a href="http://spatial-analyst.net/book/getGSOD.R">A Practical Guide to Geostatistical Mapping</a>", with updates for speed, cross-platform functionality and some added functionality.</p>
+<p>This package was largely based on Tomislav Hengl's work in "<a href="http://spatial-analyst.net/book/getGSOD.R">A Practical Guide to Geostatistical Mapping</a>", with updates for speed, cross-platform functionality. Now it's added and more options for data retrieval and error correction.</p>
 
 <p>Be sure to have disk space free and allocate the proper time for this to run. This is a time, RAM and disk space intensive process, however it does not require much processing power. </p>
 
@@ -56,13 +56,8 @@
 
 <p><code>devtools::install_github("adamhsparks/GSODR")</code></p>
 
-<h2>
-<a id="using-get_gsod" class="anchor" href="#using-get_gsod" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using get_GSOD()</h2>
-
-<p>See <code>?get_GSOD()</code> for the help file.</p>
-
-<h2>
-<a id="function-description" class="anchor" href="#function-description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function description</h2>
+<h1>
+<a id="output" class="anchor" href="#output" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Output</h1>
 
 <p>This package consists of a single function, <code>get_GSOD()</code>, which generates a 
 .csv file or ESRI format shapefile in the respective year directory containing the following variables:<br>
@@ -74,6 +69,8 @@ Force Navy" number - with WBAN being the acronym;<br>
 <strong>LAT</strong> - Latitude. <em>Station dropped in cases where values are &lt;-90 or &gt;90 degrees or Lat = 0 and Lon = 0</em>;<br>
 <strong>LON</strong> - Longitude. <em>Station dropped in cases where values are &lt;-180 or &gt;180 degrees or Lat = 0 and Lon = 0</em>;<br>
 <strong>ELEV.M</strong> - Elevation converted to metres. <em>Station dropped where ELEV is NA</em>;<br>
+<strong>ELEV.M.SRTM.90m</strong> - Elevation in metres corrected for possible errors, see
+Notes for more;<br>
 <strong>YEARMODA</strong> - Date in YYYY-MM-DD format;<br>
 <strong>YEAR</strong> - The year;<br>
 <strong>MONTH</strong> - The month;<br>
@@ -160,13 +157,19 @@ reported) for the occurrence during the day;  </p>
 <strong>RH</strong> - Mean daily relative humidity;  </p>
 
 <h2>
-<a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Disclaimer</h2>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notes</h2>
 
-<p>Users of these data should take into account the following (from the NCDC
-website): </p>
+<p>90m hole-filled SRTM digital elevation (Jarvis <em>et al.</em> 2008) was used to
+identify and correct/remove elevation errors in data for station locations
+between -60˚ and 60˚. This applies to cases here where elevation was missing in
+the reported values as well. In case the station reported an elevation and the
+DEM does not, the station reported is taken. For stations beyond -60˚ and 60˚the
+values are station reported values in every instance. See <a href="https://github.com/adamhsparks/GSODR/blob/devel/data-raw/fetch_isd-history.md">https://github.com/adamhsparks/GSODR/blob/devel/data-raw/fetch_isd-history.md</a> for more detail on the correction methods.  </p>
+
+<p>Users of these data should take into account the following (from the <a href="http://www7.ncdc.noaa.gov/CDO/cdoselect.cmd?datasetabbv=GSOD&amp;countryabbv=&amp;georegionabbv=">NCDC website</a>):  </p>
 
 <blockquote>
-<p>The following data and products may have conditions placed on their international commercial use. They can be used within the U.S. or for non-commercial international activities without restriction. The non-U.S. data cannot be redistributed for commercial purposes. Re-distribution of these data by others must provide this same notification."</p>
+<p>"The following data and products may have conditions placed on their international commercial use. They can be used within the U.S. or for non-commercial international activities without restriction. The non-U.S. data cannot be redistributed for commercial purposes. Re-distribution of these data by others must provide this same notification." <a href="http://www.wmo.int/pages/about/Resolution40.html">WMO Resolution 40. NOAA Policy</a></p>
 </blockquote>
 
 <h2>
@@ -189,6 +192,13 @@ get_GSOD(<span class="pl-v">years</span> <span class="pl-k">=</span> <span class
 <span class="pl-smi">maximum</span> <span class="pl-smi">of</span> <span class="pl-smi">five</span> <span class="pl-smi">missing</span> <span class="pl-smi">days</span> <span class="pl-smi">per</span> <span class="pl-smi">station</span> <span class="pl-smi">allowed</span>.
 
 get_GSOD(<span class="pl-v">years</span> <span class="pl-k">=</span> <span class="pl-c1">2010</span>, <span class="pl-v">country</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Australia<span class="pl-pds">"</span></span>, <span class="pl-v">path</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>~/Downloads<span class="pl-pds">"</span></span>)</pre></div>
+
+<h1>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h1>
+
+<p>Jarvis, A, HI Reuter, A Nelson, E Guevara, 2008, Hole-filled SRTM for the
+globe Version 4, available from the CGIAR-CSI SRTM 90m Database
+(<a href="http://srtm.csi.cgiar.org">http://srtm.csi.cgiar.org</a>)</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/adamhsparks/GSODR">GSODR</a> is maintained by <a href="https://github.com/adamhsparks">adamhsparks</a>.</span>
