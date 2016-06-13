@@ -23,7 +23,7 @@
 <a id="gsodr" class="anchor" href="#gsodr" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GSODR</h1>
 
 <p><a href="https://travis-ci.org/adamhsparks/GSODR"><img src="https://travis-ci.org/adamhsparks/GSODR.svg?branch=master" alt="Travis-CI Build Status"></a>
-<a href="https://ci.appveyor.com/project/adamhsparks/GSODR/branch/master"><img src="https://ci.appveyor.com/api/projects/status/8daqtllo2sg6me07/branch/master" alt="Build status"></a>
+<a href="https://ci.appveyor.com/project/adamhsparks/GSODR/branch/master?svg=true"><img src="https://ci.appveyor.com/api/projects/status/8daqtllo2sg6me07/branch/master?svg=true" alt="Build status"></a>
 <a href="https://github.com/metacran/cranlogs.app"><img src="http://cranlogs.r-pkg.org/badges/GSODR?color=brightgreen" alt="rstudio mirror downloads"></a>
 <a href="https://cran.r-project.org/package=GSODR"><img src="http://www.r-pkg.org/badges/version/GSODR" alt="cran version"></a></p>
 
@@ -68,7 +68,7 @@ Force Navy" number - with WBAN being the acronym;<br>
 <strong>CTRY</strong> - Country;<br>
 <strong>LAT</strong> - Latitude. <em>Station dropped in cases where values are &lt;-90 or &gt;90 degrees or Lat = 0 and Lon = 0</em>;<br>
 <strong>LON</strong> - Longitude. <em>Station dropped in cases where values are &lt;-180 or &gt;180 degrees or Lat = 0 and Lon = 0</em>;<br>
-<strong>ELEV.M</strong> - Elevation converted to metres. <em>Station dropped where ELEV is NA</em>;<br>
+<strong>ELEV.M</strong> - Elevation converted to metres.<br>
 <strong>ELEV.M.SRTM.90m</strong> - Elevation in metres corrected for possible errors, see
 Notes for more;<br>
 <strong>YEARMODA</strong> - Date in YYYY-MM-DD format;<br>
@@ -77,47 +77,47 @@ Notes for more;<br>
 <strong>DAY</strong> - The day;<br>
 <strong>YDAY</strong> - Sequential day of year (not in original GSOD);<br>
 <strong>TEMP</strong> - Mean daily temperature converted to degrees C to tenths. Missing =
--9999.99;<br>
+-9999;<br>
 <strong>TEMP.CNT</strong> - Number of observations used in calculating mean daily
 temperature;<br>
 <strong>DEWP</strong>-  Mean daily dewpoint converted to degrees C to tenths. Missing =
--9999.99;<br>
+-9999;<br>
 <strong>DEWP.CNT</strong> - Number of observations used in calculating mean daily dew point;<br>
-<strong>SLP</strong> - Mean sea level pressure in millibars to tenths. Missing = -9999.99;<br>
+<strong>SLP</strong> - Mean sea level pressure in millibars to tenths. Missing = -9999;<br>
 <strong>SLP.CNT</strong> - Number of observations used in calculating mean sea level
 pressure;<br>
 <strong>STP</strong> - Mean station pressure for the day in millibars to tenths
-Missing = -9999.99;<br>
+Missing = -9999;<br>
 <strong>STP.CNT</strong> - Number of observations used in calculating mean station pressure;<br>
 <strong>VISIB</strong> - Mean visibility for the day converted to kilometers to tenths
-Missing = -9999.99;<br>
+Missing = -9999;<br>
 <strong>VISIB.CNT</strong> - Number of observations used in calculating mean daily
 visibility;<br>
 <strong>WDSP</strong> - Mean daily wind speed value converted to metres/second to tenths
-Missing = -9999.99;<br>
+Missing = -9999;<br>
 <strong>WDSP.CNT</strong> - Number of observations used in calculating mean daily windspeed;<br>
 <strong>MXSPD</strong> - Maximum sustained wind speed reported for the day converted to
-metres/second to tenths. Missing = -9999.99;<br>
+metres/second to tenths. Missing = -9999;<br>
 <strong>GUST</strong> = Maximum wind gust reported for the day converted to metres/second to
-tenths. Missing = -9999.99;<br>
+tenths. Missing = -9999;<br>
 <strong>MAX</strong> - Maximum temperature reported during the day converted to Celsius to
 tenths--time of max temp report varies by country and region, so this will
-sometimes not be the max for the calendar day;<br>
+sometimes not be the max for the calendar day. Missing = -9999;<br>
 <strong>MAX.FLAG</strong> - Blank indicates max temp was taken from the explicit max
-temp report and not from the 'hourly' data.  * indicates max temp was derived
+temp report and not from the 'hourly' data. * indicates max temp was derived
 from the hourly data (i.e., highest hourly or synoptic-reported temperature);<br>
 <strong>MIN</strong>- Minimum temperature reported during the day converted to Celsius to
 tenths--time of min temp report varies by country and region, so this will
-sometimes not be the max for the calendar day;<br>
+sometimes not be the max for the calendar day. Missing = -9999;  ;<br>
 <strong>MIN.FLAG</strong> - Blank indicates max temp was taken from the explicit max
 temp report and not from the 'hourly' data. * indicates max temp was derived
 from the hourly data (i.e., highest hourly or synoptic-reported temperature);<br>
 <strong>PRCP</strong> - Total precipitation (rain and/or melted snow) reported during the day
-converted to millimetres to hundredths;   will usually not end with the
+converted to millimetres to hundredths; will usually not end with the
 midnight observation--i.e., may include latter part of previous day. .00
-indicates no measurable precipitation (includes a trace). Missing = -9999.99;
+indicates no measurable precipitation (includes a trace). Missing = -9999;
 <em>Note:  Many stations do not report '0' on days with no precipitation--
-therefore, '-9999.99' will often appear on these days. For example, a
+therefore, '-9999' will often appear on these days. For example, a
 station may only report a 6-hour amount for the period during which rain
 fell.</em> See FLAGS.PRCP column for source of data;<br>
 <strong>PRCP.FLAG</strong> -<br>
@@ -135,7 +135,7 @@ as incomplete data for the day;<br>
 I = Station did not report any precip data for the day and did not report any
 occurrences of precipitation in its hourly observations--it's still possible
 that precip occurred but was not reported;<br>
-<strong>SNDP</strong> - Snow depth in millimetres to tenths. Missing = -9999.99;<br>
+<strong>SNDP</strong> - Snow depth in millimetres to tenths. Missing = -9999;<br>
 <strong>I.FOG</strong> - Indicator for fog, (1 = yes, 0 = no/not reported) for the occurrence during the
 day;<br>
 <strong>I.RAIN_DZL</strong> - Indicator for rain or drizzle, (1 = yes, 0 = no/not reported)
