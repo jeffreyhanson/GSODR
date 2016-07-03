@@ -31,7 +31,7 @@
 
 <p>This package was largely based on Tomislav Hengl's work in "<a href="http://spatial-analyst.net/book/getGSOD.R">A Practical Guide to Geostatistical Mapping</a>", with updates for speed, cross-platform functionality. Now it's added and more options for data retrieval and error correction.</p>
 
-<p>Be sure to have disk space free and allocate the proper time for this to run. This is a time, RAM and disk space intensive process, however it does not require much processing power. </p>
+<p>Be sure to have disk space free and allocate the proper time for this to run. This is a time, RAM and disk space intensive process, however it does not require much processing power.</p>
 
 <p>For more information see the description of the data provided by NCDC, <a href="http://www7.ncdc.noaa.gov/CDO/GSOD_DESC.txt">http://www7.ncdc.noaa.gov/CDO/GSOD_DESC.txt</a>.</p>
 
@@ -59,7 +59,7 @@
 <h1>
 <a id="output" class="anchor" href="#output" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Output</h1>
 
-<p>This package consists of a single function, <code>get_GSOD()</code>, which generates a 
+<p>This package consists of a single function, <code>get_GSOD()</code>, which generates a
 .csv file or ESRI format shapefile in the respective year directory containing the following variables:<br>
 <strong>STNID</strong> - Station number (WMO/DATSAV3 number) for the location;<br>
 <strong>WBAN</strong> - number where applicable--this is the historical "Weather Bureau Air
@@ -160,7 +160,7 @@ reported) for the occurrence during the day;  </p>
 <a id="notes" class="anchor" href="#notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notes</h2>
 
 <p>90m hole-filled SRTM digital elevation (Jarvis <em>et al.</em> 2008) was used to
-identify and correct/remove elevation errors in data for station locations 
+identify and correct/remove elevation errors in data for station locations
 between -60˚ and 60˚ latitude. This applies to cases here where elevation was
 missing in the reported values as well. In case the station reported an
 elevation and the DEM does not, the station reported is taken. For stations
