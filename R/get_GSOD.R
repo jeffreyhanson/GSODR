@@ -23,7 +23,8 @@
 #' output file. Defaults to the current working directory.
 #' @param max_missing The maximum number of days allowed to be missing from a
 #' station's data before it is excluded from final file output. Defaults to five
-#' days.
+#' days. If a single station is specified, this option is ignored and any data
+#' available, even an empty file,from NCDC will be returned.
 #' @param agroclimatology Only clean data for stations between latitudes 60 and
 #' -60 for agroclimatology work, defaults to FALSE. Set to FALSE to override and
 #' include only stations within the confines of these latitudes.
@@ -205,7 +206,7 @@ get_GSOD <- function(years = NULL, station = NULL, country = NULL, path = "",
                      shapefile = FALSE, CSV = TRUE) {
 
   # Setting up options, creating objects, check variables entered by user-------
-  options(warn = 2)
+  opt <- settings::options_manager(warn = 2, timeout = 300)
 
   utils::data("stations", package = "GSODR", envir = environment())
   stations <- get("stations", envir = environment())
@@ -224,6 +225,9 @@ get_GSOD <- function(years = NULL, station = NULL, country = NULL, path = "",
   # Check years given by the user, are they valid?
   .validate_years(years)
 
+  # Check station given by user, is it valid?
+  .validate_station(station)
+
   # Check country given by user and format for use in function
   if (!is.null(country)) {
     country <- .get_country(country)
@@ -232,7 +236,7 @@ get_GSOD <- function(years = NULL, station = NULL, country = NULL, path = "",
   # By default, if a single station is selected, then we will report even just
   # one day of data if that's all that is recorded
   if (!is.null(station)) {
-    max_missing <- 364
+    max_missing <- 366
   }
 
   ftp_site <- "ftp://ftp.ncdc.noaa.gov/pub/data/gsod/"
@@ -278,7 +282,8 @@ get_GSOD <- function(years = NULL, station = NULL, country = NULL, path = "",
 
     # If a single station is selected---------------------- --------------------
     if (!is.null(station)) {
-      tmp <- .read_gz(paste0(ftp_site, yr, "/", station, "-", yr, ".op.gz"))
+      tmp <- try(.read_gz(paste0(ftp_site, yr, "/", station, "-", yr,
+                                 ".op.gz")))
       GSOD_XY <- .reformat(tmp, stations)
     } else {
       # For a country, the entire set or agroclimatology -----------------------
@@ -328,6 +333,7 @@ get_GSOD <- function(years = NULL, station = NULL, country = NULL, path = "",
   }
   unlink(tf)
   unlink(td)
+  settings::reset(opt)
 }
 
 # Functions used within this package -------------------------------------------
@@ -472,7 +478,7 @@ get_GSOD <- function(years = NULL, station = NULL, country = NULL, path = "",
 .get_country <- function(country = "") {
   country <- toupper(raster::trim(country[1]))
   cs <- raster::ccodes()
-  # from user juba, http://stackoverflow.com/questions/16516593/convert-from-lowercase-to-uppercase-all-values-in-all-character-variables-in-dat
+  # from Stack Overflow user juba, goo.gl/S31jyk
   cs <- data.frame(lapply(cs, function(x) {
     if (is.character(x)) return(toupper(x))
     else return(x)
@@ -531,5 +537,18 @@ get_GSOD <- function(years = NULL, station = NULL, country = NULL, path = "",
       }
       return(1)
     }
+  }
+}
+
+.validate_station <- function(station){
+  utils::data("stations", package = "GSODR", envir = environment())
+  stations <- get("stations", envir = environment())
+  stations[, 12] <- as.character(stations[, 12])
+
+  if (station %in% stations[, 12] == FALSE) {
+    stop("\nThis is not a valid station ID number, please check.\n
+         Station IDs are provided as a part of the GSODR package in the
+         'stations' data frame in the STNID column.")
+    return(0)
   }
 }
